@@ -1,12 +1,14 @@
-import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
-import { Home } from './Page 1/Home'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Payment from './Pages/Payment';
 
-export const Routes = () => { 
-    return(
-        <Router>
-            <Switch>
-                <Route path="/"><Home></Home></Route>
-            </Switch>
-        </Router>
-    )
-}
+const AppRoutes = () => (
+  <Router>
+    <Routes>
+      <Route path="/payment" element={<Payment />} />
+      {/* other routes */}
+    </Routes>
+  </Router>
+);
+
+export default AppRoutes;
