@@ -43,7 +43,7 @@ const Payment = () => {
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
             <img src="https://www.minds.org.sg/wp-content/uploads/2020/04/logo-minds@2x.png" alt="MINDS Logo" style={{ width: '200px', height: 'auto' }} />
           </Box>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" align="center">
             Generate PayNow QR Code
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
@@ -88,7 +88,7 @@ const Payment = () => {
           </Box>
           {qrCodeUrl && (
             <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-              <img src={qrCodeUrl} alt="QR Code" style={{ borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }} />
+              <img src={qrCodeUrl} alt="QR Code" style={{ borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', width: '90%', height: '90%'}} />
             </Box>
           )}
         </Box>
@@ -97,4 +97,4 @@ const Payment = () => {
   );
 }
 
-export default Payment;
+export default Payment

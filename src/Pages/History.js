@@ -1,54 +1,146 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, { useState, useEffect } from "react";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+// Step 1: Define the Data
+const students = [
+  { id: 1, name: "Alice Johnson", dob: "2001-04-15", major: "Computer Science" },
+  { id: 2, name: "Bob Smith", dob: "2000-09-08", major: "Mathematics" },
+  { id: 3, name: "Carol Williams", dob: "1999-02-23", major: "Physics" },
+  // Add more student records as needed
 ];
 
-export default function BasicTable() {
+// Step 2: Build the Table Component
+const StudentTable = () => {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Date of Birth</th>
+          <th>Major</th>
+        </tr>
+      </thead>
+      <tbody>
+        {students.map((student) => (
+          <tr key={student.id}>
+            <td>{student.id}</td>
+            <td>{student.name}</td>
+            <td>{student.dob}</td>
+            <td>{student.major}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+// Step 1: Add a Scrollable Container
+const ScrollableTableContainer = () => {
+  return (
+    <div className="table-container">
+      <StudentTable />
+    </div>
+  );
+};
+
+// Step 2: Create Responsive Table Component
+const StudentTableResponsive = () => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Date of Birth</th>
+          <th>Major</th>
+        </tr>
+      </thead>
+      <tbody>
+        {students.map((student) => (
+          <tr key={student.id}>
+            <td>
+              <span className="cell-header">Student ID:</span> {student.id}
+            </td>
+            <td>
+              <span className="cell-header">Name:</span> {student.name}
+            </td>
+            <td>
+              <span className="cell-header">Date of Birth:</span> {student.dob}
+            </td>
+            <td>
+              <span className="cell-header">Major:</span> {student.major}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+// Step 3: Export App Component
+export default function App() {
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 700);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 700);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <div>
+      {isMobileView ? <StudentTableResponsive /> : <ScrollableTableContainer />}
+    </div>
   );
 }
+
+// Step 4: Styling the Table (CSS)
+const styles = `
+.table-container {
+  overflow-x: auto;
+}
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+tr {
+  border-bottom: 1px solid #ccc;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  white-space: nowrap;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.cell-header {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  th {
+    display: none;
+  }
+  .cell-header {
+    display: block;
+    font-weight: bold;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+`;
+
+// Create a style tag and append it to the head
+const styleSheet = document.createElement("style");
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
