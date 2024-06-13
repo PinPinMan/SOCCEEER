@@ -2,31 +2,29 @@ import React, { useState, useEffect } from "react";
 
 // Step 1: Define the Data
 const students = [
-  { id: 1, name: "Alice Johnson", dob: "2001-04-15", major: "Computer Science" },
-  { id: 2, name: "Bob Smith", dob: "2000-09-08", major: "Mathematics" },
-  { id: 3, name: "Carol Williams", dob: "1999-02-23", major: "Physics" },
+  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
+  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
+  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
   // Add more student records as needed
 ];
 
 // Step 2: Build the Table Component
 const StudentTable = () => {
   return (
-    <table>
+    <table style={{ width: '97%', borderCollapse: 'collapse', margin: '10px auto', justifyContent: 'center' }}>
       <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Name</th>
-          <th>Date of Birth</th>
-          <th>Major</th>
+        <tr style={{ backgroundColor: '#f2f2f2' }}>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Plate</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date & Time</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Price</th>
         </tr>
       </thead>
       <tbody>
         {students.map((student) => (
           <tr key={student.id}>
-            <td>{student.id}</td>
-            <td>{student.name}</td>
-            <td>{student.dob}</td>
-            <td>{student.major}</td>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Car_Plate}</td>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Date_Time}</td>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Price}</td>
           </tr>
         ))}
       </tbody>
@@ -43,39 +41,44 @@ const ScrollableTableContainer = () => {
   );
 };
 
-// Step 2: Create Responsive Table Component
 const StudentTableResponsive = () => {
   return (
-    <table>
+    <table style={{ width: '100%', borderCollapse: 'collapse', margin: '20px 0' }}>
       <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Name</th>
-          <th>Date of Birth</th>
-          <th>Major</th>
+        <tr style={{ backgroundColor: '#f2f2f2' }}>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Student ID</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Name</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date of Birth</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Major</th>
         </tr>
       </thead>
       <tbody>
         {students.map((student) => (
-          <tr key={student.id}>
-            <td>
-              <span className="cell-header">Student ID:</span> {student.id}
-            </td>
-            <td>
-              <span className="cell-header">Name:</span> {student.name}
-            </td>
-            <td>
-              <span className="cell-header">Date of Birth:</span> {student.dob}
-            </td>
-            <td>
-              <span className="cell-header">Major:</span> {student.major}
-            </td>
-          </tr>
+          <>
+            <tr key={student.id}>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                <span className="cell-header">Student ID:</span> <hr /> {student.id}
+              </td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                <span className="cell-header">Name:</span> <hr /> {student.name}
+              </td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                <span className="cell-header">Date of Birth:</span> <hr /> {student.dob}
+              </td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                <span className="cell-header">Major:</span> <hr /> {student.major}
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="4" style={{ height: '20px' }}></td> {/* Empty space between rows */}
+            </tr>
+          </>
         ))}
       </tbody>
     </table>
   );
 };
+
 
 // Step 3: Export App Component
 export default function App() {
@@ -94,6 +97,7 @@ export default function App() {
 
   return (
     <div>
+      <h1 style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', textDecoration: 'underline' }}>History of Payment</h1>
       {isMobileView ? <StudentTableResponsive /> : <ScrollableTableContainer />}
     </div>
   );

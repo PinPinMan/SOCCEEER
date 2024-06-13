@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { useLocation } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -27,6 +28,10 @@ const Payment = () => {
     const qrCodeUrl = `https://sgqrcode.com/paynow?${urlParams.toString()}`;
     setQrCodeUrl(qrCodeUrl);
   };
+
+  // const value = queryParams.get('VehId'); // Retrieve the value of a specific query parameter
+
+  // console.log(value)
 
   return (
     <ThemeProvider theme={defaultTheme}>

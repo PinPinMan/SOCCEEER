@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -10,14 +11,17 @@ const defaultTheme = createTheme();
 
 export default function CarTypes() {
   const carTypes = [
-    { name: 'Sedan', logo: 'URL_FOR_SEDAN_LOGO' },
-    { name: 'SUV', logo: 'URL_FOR_SUV_LOGO' },
-    { name: 'Truck', logo: 'URL_FOR_TRUCK_LOGO' },
-    { name: 'Coupe', logo: 'URL_FOR_COUPE_LOGO' },
-    { name: 'Convertible', logo: 'URL_FOR_CONVERTIBLE_LOGO' }
+    { name: '4 Seater', logo: '4_Seater' },
+    { name: '6 Seater', logo: '6_Seater' },
+    { name: 'Bigger Vehicle', logo: 'Big_Veh' }
+
   ];
 
-  const iconStyle = { width: 50, height: 50 }; // Adjust the size here
+  const navigate = useNavigate();
+
+  const handleButtonClick = (carType) => {
+    navigate(`/payment/${carType}`);
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -40,18 +44,18 @@ export default function CarTypes() {
           </Box>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
             {carTypes.map((car) => (
-              <Grid item xs={4} sm={4} md={4} key={car.name}>
+              <Grid item xs={6} key={car.name}>
                 <Button
                   fullWidth
                   variant="contained"
+                  onClick={() => handleButtonClick(car.logo)}
                   sx={{
                     height: '30vh',
                     display: 'flex',
-                    flexDirection: 'column', // Centering content within the button
+                    flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  href={`${window.location.pathname}/${car.name.toLowerCase()}`}
                 >
                   {car.name}
                 </Button>
