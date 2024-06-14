@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
 
-// Step 1: Define the Data
-const students = [
-  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
-  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
-  { Car_Plate: 'S1234567H', Date_Time: "11/06/2024 10:23:46", Price: 10},
-  // Add more student records as needed
-];
 
-// Step 2: Build the Table Component
 const StudentTable = () => {
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8081/cars')
+      .then((response) => response.json())
+      .then((data) => {
+        setCars(data);
+      });
+  }, []);
+
+  if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = '/';
+    return null;
+  }
+  
   return (
     <table style={{ width: '97%', borderCollapse: 'collapse', margin: '10px auto', justifyContent: 'center' }}>
       <thead>
@@ -20,11 +28,11 @@ const StudentTable = () => {
         </tr>
       </thead>
       <tbody>
-        {students.map((student) => (
-          <tr key={student.id}>
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Car_Plate}</td>
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Date_Time}</td>
-            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{student.Price}</td>
+        {cars.map((car) => (
+          <tr key={car.car_wash_id}>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_plate}</td>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.date_time}</td>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.price}</td>
           </tr>
         ))}
       </tbody>
@@ -32,7 +40,6 @@ const StudentTable = () => {
   );
 };
 
-// Step 1: Add a Scrollable Container
 const ScrollableTableContainer = () => {
   return (
     <div className="table-container">
@@ -42,32 +49,34 @@ const ScrollableTableContainer = () => {
 };
 
 const StudentTableResponsive = () => {
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8081/cars')
+      .then((response) => response.json())
+      .then((data) => {
+        setCars(data);
+      });
+  }, []);
+
   return (
     <table style={{ width: '100%', borderCollapse: 'collapse', margin: '20px 0' }}>
       <thead>
         <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Student ID</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Name</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date of Birth</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Major</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Wash ID</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Plate</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date & Time</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Price</th>
         </tr>
       </thead>
       <tbody>
-        {students.map((student) => (
+        {cars.map((car) => (
           <>
-            <tr key={student.id}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <span className="cell-header">Student ID:</span> <hr /> {student.id}
-              </td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <span className="cell-header">Name:</span> <hr /> {student.name}
-              </td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <span className="cell-header">Date of Birth:</span> <hr /> {student.dob}
-              </td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <span className="cell-header">Major:</span> <hr /> {student.major}
-              </td>
+            <tr key={car.car_wash_id}>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_wash_id}</td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_plate}</td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.date_time}</td>
+              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.price}</td>
             </tr>
             <tr>
               <td colSpan="4" style={{ height: '20px' }}></td> {/* Empty space between rows */}
@@ -79,8 +88,6 @@ const StudentTableResponsive = () => {
   );
 };
 
-
-// Step 3: Export App Component
 export default function App() {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 700);
 
@@ -95,15 +102,20 @@ export default function App() {
     };
   }, []);
 
+  const handleReturn = () => {
+    window.location.href = '/main';
+    console.log("Return button clicked");
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', textDecoration: 'underline' }}>History of Payment</h1>
       {isMobileView ? <StudentTableResponsive /> : <ScrollableTableContainer />}
+      <Button onClick={handleReturn} style={{ position: 'absolute', bottom: '10px', left: '10px', backgroundColor: '#007bff', color: 'white', fontWeight: 'bold' }}>Return</Button>
     </div>
   );
 }
 
-// Step 4: Styling the Table (CSS)
 const styles = `
 .table-container {
   overflow-x: auto;

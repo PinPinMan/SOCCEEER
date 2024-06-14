@@ -19,7 +19,17 @@ export default function SignIn() {
     });
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('isLoggedIn');
+    window.location.href = '/'; // Redirect to the login page or any other appropriate page
+  };
+
   const iconStyle = { width: 50, height: 50 }; // Adjust the size here
+
+  if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = '/';
+    return null;
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -49,12 +59,12 @@ export default function SignIn() {
                 mt: 3,
                 mb: 2,
                 height: '30vh',
+                width: '40vh',
                 display: 'flex',
-                width: "40vh",
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              href='/Payment'
+              href="/CarTypes"
             >
               <PaymentIcon sx={iconStyle} />
               New Transaction
@@ -67,15 +77,31 @@ export default function SignIn() {
                 mt: 3,
                 mb: 2,
                 height: '30vh',
-                width: "40vh",
+                width: '40vh',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              href='/History'
+              href="/History"
             >
               <HistoryIcon sx={iconStyle} />
               View History
+            </Button>
+            <Button
+              onClick={handleLogout}
+              fullWidth
+              variant="outlined"
+              sx={{
+                mt: 3,
+                mb: 2,
+                borderColor: 'red',
+                color: 'red',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              Log Out
             </Button>
           </Box>
         </Box>

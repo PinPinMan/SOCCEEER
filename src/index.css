@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  5%, 65%{
+    transform: translateX(-5px);
+  }
+  35%, 95%{
+    transform: translateX(5px);
+  }
+}
+
+.shake-element {
+  animation: shake 0.3s ease-in-out;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -28,10 +28,6 @@ const Payment = () => {
     const qrCodeUrl = `https://sgqrcode.com/paynow?${urlParams.toString()}`;
     setQrCodeUrl(qrCodeUrl);
   };
-
-  // const value = queryParams.get('VehId'); // Retrieve the value of a specific query parameter
-
-  // console.log(value)
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -83,7 +79,7 @@ const Payment = () => {
               onChange={(e) => setRefId(e.target.value)}
             />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, width: '100%' }}>
-              <Button variant="contained" color="primary" onClick={() => generateQRCode(10)} sx={{ flexGrow: 1, mx: 1 }}>
+              <Button variant="contained" color="primary" onClick={() => generateQRCode(0.01)} sx={{ flexGrow: 1, mx: 1 }}>
                 $10
               </Button>
               <Button variant="contained" color="primary" onClick={() => generateQRCode(15)} sx={{ flexGrow: 1, mx: 1 }}>
