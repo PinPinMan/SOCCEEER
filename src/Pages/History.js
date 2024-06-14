@@ -2,23 +2,28 @@ import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 
 
-const StudentTable = () => {
+const StudentTable = ({ date }) => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8081/cars')
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchCars = async () => {
+      try {
+        const response = await fetch(`http://localhost:8081/cars/${date?`${date}`:''}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
         setCars(data);
-      });
-  }, []);
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    };
 
-  if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-    window.location.href = '/';
-    return null;
-  }
+    fetchCars();
+  }, [date]);
   
   return (
+    <div style={{height:'60vh',  overflowY: 'scroll'}}>
     <table style={{ width: '97%', borderCollapse: 'collapse', margin: '10px auto', justifyContent: 'center' }}>
       <thead>
         <tr style={{ backgroundColor: '#f2f2f2' }}>
@@ -37,71 +42,65 @@ const StudentTable = () => {
         ))}
       </tbody>
     </table>
-  );
-};
-
-const ScrollableTableContainer = () => {
-  return (
-    <div className="table-container">
-      <StudentTable />
     </div>
   );
 };
 
-const StudentTableResponsive = () => {
+const ScrollableTableContainer = ({ date }) => {
+  return (
+    <div className="table-container">
+      <StudentTable date={date} />
+    </div>
+  );
+};
+
+const StudentTableResponsive = ({ date }) => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8081/cars')
+    fetch(`http://localhost:8081/cars/${date ? `${date}` : ''}`)
       .then((response) => response.json())
       .then((data) => {
         setCars(data);
       });
-  }, []);
+  }, [date]);
 
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse', margin: '20px 0' }}>
-      <thead>
-        <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Wash ID</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Plate</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date & Time</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {cars.map((car) => (
-          <>
-            <tr key={car.car_wash_id}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_wash_id}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_plate}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.date_time}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.price}</td>
-            </tr>
-            <tr>
-              <td colSpan="4" style={{ height: '20px' }}></td> {/* Empty space between rows */}
-            </tr>
-          </>
-        ))}
-      </tbody>
-    </table>
+
+    <div style={{height:'60vh',  overflowY: 'scroll'}}>
+      {cars.map((car) => (
+        <div style={{ border: '1px solid #ddd', marginBottom: '10px', padding: '10px', width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            <li><strong>Car Plate:</strong> {car.car_plate}</li>
+            <li><strong>Date & Time:</strong> {car.date_time}</li>
+            <li><strong>Price:</strong> {car.price}</li>
+          </ul>
+        </div>
+          ))}
+    </div>
   );
 };
 
 export default function App() {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 700);
+  const [selectedDate, setSelectedDate] = useState('');
 
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth < 700);
     };
-
+    
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
+  
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+  
   const handleReturn = () => {
     window.location.href = '/main';
     console.log("Return button clicked");
@@ -110,12 +109,17 @@ export default function App() {
   return (
     <div>
       <h1 style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', textDecoration: 'underline' }}>History of Payment</h1>
-      {isMobileView ? <StudentTableResponsive /> : <ScrollableTableContainer />}
-      <Button onClick={handleReturn} style={{ position: 'absolute', bottom: '10px', left: '10px', backgroundColor: '#007bff', color: 'white', fontWeight: 'bold' }}>Return</Button>
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={handleDateChange}
+        style={{ margin: '10px auto', display: 'block' }}
+      />
+      {isMobileView ? <StudentTableResponsive date={selectedDate} /> : <ScrollableTableContainer date={selectedDate} />}
+      <Button onClick={handleReturn} style={{ position:'absolute', bottom: '10px', left: '10px', backgroundColor: '#007bff', color: 'white', fontWeight: 'bold' }}>Return</Button>
     </div>
   );
 }
-
 const styles = `
 .table-container {
   overflow-x: auto;

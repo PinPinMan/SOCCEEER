@@ -76,14 +76,25 @@ app.get('/', (req, res) => {
     return res.json('Hello World');
 })
 
-app.get('/cars', (req, res) => {
-    const sql = 'SELECT * FROM cars';
+app.get('/cars/:date', (req, res) => {
+    const date = req.params.date;
+    console.log(date + ' is the date');
+    let sql = 'SELECT * FROM cars';
+  
+    // If date is provided, add a WHERE clause to filter by date
+    if (date) {
+      // Assuming date is in YYYY-MM-DD format
+      sql += ` WHERE DATE(date_time) = '${date}'`;
+    }
+  
     db.query(sql, (err, result) => {
-        if(err)
-             throw err;
-        return res.json(result);
+      if (err) {
+        throw err;
+      }
+      return res.json(result);
     });
-})
+  });
+  
 
 app.get('/username/:username', (req, res) => {
     const sql = 'SELECT * FROM users WHERE username = ?';
