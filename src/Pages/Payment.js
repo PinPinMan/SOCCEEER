@@ -18,7 +18,7 @@ const Payment = () => {
 
   const generateQRCode = (amount) => {
     const urlParams = new URLSearchParams({
-      mobile,
+      '97262926': mobile,
       uen,
       editable: 0,
       amount,

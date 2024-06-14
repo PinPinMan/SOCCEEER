@@ -64,7 +64,7 @@ export default function SignIn() {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              href="/CarTypes"
+              href="/trans"
             >
               <PaymentIcon sx={iconStyle} />
               New Transaction

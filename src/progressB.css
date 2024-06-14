@@ -1,0 +1,33 @@
+.step-progress-bar {
+    position: relative;
+    min-height: 400px; /* Adjust as necessary to give enough space for the content and buttons */
+  }
+  
+  .step-progress-btn {
+    position: absolute;
+    bottom: 20px; /* Adjust this value as necessary */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .step-progress-btn-prev {
+    left: calc(50% - 100px); /* Adjust as necessary to separate the buttons */
+    transform: translateX(-50%);
+  }
+  
+  .step-progress-btn-next {
+    left: calc(50% + 100px); /* Adjust as necessary to separate the buttons */
+    transform: translateX(-50%);
+  }
+
+  .step-progress-bar {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+.vh-65 {
+    height: 65vh;
+}

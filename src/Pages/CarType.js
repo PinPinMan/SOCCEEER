@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
 const defaultTheme = createTheme();
 
@@ -17,10 +17,12 @@ export default function CarTypes() {
 
   ];
 
-  const navigate = useNavigate();
+  const [selectedCarType, setSelectedCarType] = React.useState(sessionStorage.getItem('carType'));
+  
 
   const handleButtonClick = (carType) => {
-    navigate(`/payment/${carType}`);
+    sessionStorage.setItem('carType', carType);
+    setSelectedCarType(carType);
   };
 
   return (
@@ -42,6 +44,9 @@ export default function CarTypes() {
               style={{ width: '200px', height: 'auto' }}
             />
           </Box>
+          <Typography component="h1" variant="h5" align="center">
+            Select Car Type
+          </Typography>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
             {carTypes.map((car) => (
               <Grid item xs={6} key={car.name}>
@@ -50,11 +55,12 @@ export default function CarTypes() {
                   variant="contained"
                   onClick={() => handleButtonClick(car.logo)}
                   sx={{
-                    height: '30vh',
+                    height: '25vh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    backgroundColor: selectedCarType === car.logo ? 'green' : '#00a5e3',
                   }}
                 >
                   {car.name}
