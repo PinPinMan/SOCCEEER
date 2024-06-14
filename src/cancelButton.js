@@ -18,10 +18,14 @@ const CancelButton = () => {
         handleCloseModal(); // Close modal after confirming cancellation
         // Clear session storage except admin
         Object.keys(sessionStorage).forEach((key) => {
-            if (key !== 'admin') {
+            if (key !== 'isLoggedIn') {
                 sessionStorage.removeItem(key);
             }}); 
-        window.location.href = '/';
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = '/main';
+        } else {
+            window.location.href = '/';
+        }
     };
 
     return (
