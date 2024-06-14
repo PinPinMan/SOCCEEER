@@ -1,0 +1,55 @@
+{
+	"data": [
+		{
+			"id": "9c48a4e5-2a44-4181-b3bf-47084f08ac90",
+			"name": null,
+			"email": null,
+			"phone": null,
+			"amount": "0.00",
+			"currency": "sgd",
+			"is_currency_editable": false,
+			"status": "pending",
+			"purpose": null,
+			"reference_number": null,
+			"payment_methods": ["paynow_online"],
+			"url": "https://securecheckout.sandbox.hit-pay.com/payment-request/@adawdas",
+			"redirect_url": null,
+			"webhook": null,
+			"send_sms": true,
+			"send_email": true,
+			"sms_status": "pending",
+			"email_status": "pending",
+			"allow_repeated_payments": true,
+			"expiry_date": null,
+			"address": null,
+			"line_items": null,
+			"executor_id": null,
+			"created_at": "2024-06-14T17:43:00",
+			"updated_at": "2024-06-14T17:43:00"
+		}
+	],
+	"links": {
+		"first": "https://api.sandbox.hit-pay.com/v1/payment-requests?page=1",
+		"last": "https://api.sandbox.hit-pay.com/v1/payment-requests?page=1",
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"last_page": 1,
+		"links": [
+			{ "url": null, "label": "&larr; Previous", "active": false },
+			{
+				"url": "https://api.sandbox.hit-pay.com/v1/payment-requests?page=1",
+				"label": "1",
+				"active": true
+			},
+			{ "url": null, "label": "Next &rarr;", "active": false }
+		],
+		"path": "https://api.sandbox.hit-pay.com/v1/payment-requests",
+		"per_page": 10,
+		"to": 1,
+		"total": 1
+	}
+}
