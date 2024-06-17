@@ -8,6 +8,46 @@
 <body>
     <button id="payment-button">Create Payment Request</button>
 
-    <script src="test.js"></script>
+    <script>
+        const button = document.getElementById("payment-button")
+
+        button.addEventListener('click', function (){
+        const express = require('express');
+        const app = express();
+
+        app.use(express.json());
+
+        app.post('/proxy', (req, res) => {
+            const url = 'https://api.sandbox.hit-pay.com/v1/payment-requests';
+            const headers = {
+                'X-BUSINESS-API-KEY': '4867e54baa78dfc7423ef254d08e0994592eef664afffad81fe266cc1486cbe7',
+                'X-Requested-With': 'XMLHttpRequest'
+            };
+            const data = new URLSearchParams({
+                amount: '15.00',
+                currency: 'SGD',
+                purpose: 'S1234567J',
+                reference_number: 'S1234567J',
+                'payment_methods[]': ["paynow_online"],
+                email: 'example@example.com'
+            })
+            request.post({
+                url: url,
+                headers: headers,
+                json: data
+            }, (error, response, body) => {
+                if (error) {
+                    res.status(500).send(error);
+                } else {
+                    res.status(response.statusCode).send(body);
+                }
+            });
+        });
+
+        app.listen(3000, () => {
+            console.log('Proxy server running on port 3000');
+    });
+    })
+    </script>
 </body>
 </html>
