@@ -20,7 +20,7 @@ export default function SignIn() {
     const username = data.get('username');
     const password = data.get('password');
     try {
-      const response = await fetch(`http://localhost:8081/username/${username}`);
+      const response = await fetch(`https://mysql-back-2-socceeer.apps.hackathon.cnasg.dellcsc.com/username/${username}`);
       console.log(response)
       if (!response.ok) {
         throw new Error('Network response was not ok.');

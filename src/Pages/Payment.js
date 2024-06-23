@@ -6,9 +6,47 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom';
+import { useHref, useLocation } from 'react-router-dom';
+// const fetch = require('node-fetch');
+const createPaymentRequest = require('./test');
+
+// Call the function
+createPaymentRequest();
 
 const defaultTheme = createTheme();
+
+const url = 'https://api.sandbox.hit-pay.com/v1/payment-requests';
+  
+const data = {
+  amount: "15.00",
+  currency: "SGD",
+  email: "example@example.com",
+  payment_methods: ["paynow_online"],
+  purpose: "S1234567J",
+  reference_number: "S1234567J",
+  expiry_date: "2030-02-02 01:01:01"
+};
+
+const headers = {
+  'Content-Type': 'application/json',
+  'X-BUSINESS-API-KEY': '4867e54baa78dfc7423ef254d08e0994592eef664afffad81fe266cc1486cbe7',
+  'X-Requested-With': 'XMLHttpRequest'
+};
+
+fetch(url, {
+  method: 'POST',
+  headers: headers,
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(responseData => {
+  console.log('Success:', responseData.url);
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
+
 
 const Payment = () => {
   const [mobile, setMobile] = React.useState('');
@@ -16,19 +54,21 @@ const Payment = () => {
   const [refId, setRefId] = React.useState('');
   const [qrCodeUrl, setQrCodeUrl] = React.useState('');
 
-  const generateQRCode = (amount) => {
-    const urlParams = new URLSearchParams({
-      '97262926': mobile,
-      uen,
-      editable: 0,
-      amount,
-      ref_id: refId,
-      company: 'MINDS'
-    });
-    const qrCodeUrl = `https://sgqrcode.com/paynow?${urlParams.toString()}`;
-    setQrCodeUrl(qrCodeUrl);
-  };
+  const generateQRCode = async (amount) => {
+    // const urlParams = new URLSearchParams({
+    //   '97262926': mobile,
+    //   uen,
+    //   editable: 0,
+    //   amount,
+    //   ref_id: refId,
+    //   company: 'MINDS'
+    // });
+    // const qrCodeUrl = `https://sgqrcode.com/paynow?${urlParams.toString()}`;
 
+    
+  };
+  
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="sm">
@@ -79,7 +119,7 @@ const Payment = () => {
               onChange={(e) => setRefId(e.target.value)}
             />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, width: '100%' }}>
-              <Button variant="contained" color="primary" onClick={() => generateQRCode(0.01)} sx={{ flexGrow: 1, mx: 1 }}>
+              <Button variant="contained" color="primary" onClick={() => generateQRCode(10)} sx={{ flexGrow: 1, mx: 1 }}>
                 $10
               </Button>
               <Button variant="contained" color="primary" onClick={() => generateQRCode(15)} sx={{ flexGrow: 1, mx: 1 }}>
@@ -87,11 +127,6 @@ const Payment = () => {
               </Button>
             </Box>
           </Box>
-          {qrCodeUrl && (
-            <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-              <img src={qrCodeUrl} alt="QR Code" style={{ borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', width: '90%', height: '90%'}} />
-            </Box>
-          )}
         </Box>
       </Container>
     </ThemeProvider>

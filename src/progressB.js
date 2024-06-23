@@ -13,6 +13,7 @@ import './progressB.css' // Import the custom CSS
 // import Landing from './Pages/LandingPage';
 import CarTypes from './Pages/CarType';
 import CarInfo from './Pages/CarInfo';
+import Payment from "./Pages/Payment";
 import CancelButton from "./cancelButton";
 // const AppRoutes = () => (
 //   <Router>
@@ -31,7 +32,7 @@ import CancelButton from "./cancelButton";
 export const ProgressB = () => {
   const step1Content = <div class='vh-65'><CancelButton/><CarTypes /></div>;
   const step2Content = <div class='vh-65'><CancelButton/><CarInfo/></div>;
-  const step3Content = <div class='vh-65'><CancelButton/></div>; 
+  const step3Content = <div class='vh-65'><CancelButton/><Payment/></div>; 
   const step4Content = <div class='vh-65'><CancelButton/></div>;
   function step1Validator() {
     if (sessionStorage.getItem('carType') == null) {
@@ -71,18 +72,18 @@ export const ProgressB = () => {
           validator: step1Validator
         },
         {
-          label: "Step 2",
+          label: "Car Plate",
           name: "step 2",
           content: step2Content,
           validator: step2Validator
         },
         {
-          label: "Step 3",
+          label: "Payment",
           name: "step 3",
           content: step3Content,
         },
         {
-          label: "Step 4",
+          label: "Success",
           name: "Step 4",
           content: step4Content,
         }
