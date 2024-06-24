@@ -6,7 +6,7 @@ const StudentTable = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch('https://mysql-back-2-socceeer.apps.hackathon.cnasg.dellcsc.com/cars')
+    fetch('https://mysql-back-3-socceeer.apps.hackathon.cnasg.dellcsc.com/cars')
       .then((response) => response.json())
       .then((data) => {
         setCars(data);
@@ -52,7 +52,7 @@ const StudentTableResponsive = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch('https://mysql-back-2-socceeer.apps.hackathon.cnasg.dellcsc.com/cars')
+    fetch('https://mysql-back-3-socceeer.apps.hackathon.cnasg.dellcsc.com/cars')
       .then((response) => response.json())
       .then((data) => {
         setCars(data);

@@ -11,10 +11,11 @@ const defaultTheme = createTheme();
 
 export default function CarTypes() {
   const carTypes = [
-    { name: '4 Seater', logo: '4_Seater' },
-    { name: '6 Seater', logo: '6_Seater' },
-    { name: 'Bigger Vehicle', logo: 'Big_Veh' }
-
+    { name: 'Saloon Car', logo: 'Saloon Car' },
+    { name: 'SUV/ MPV/ Small Van', logo: 'SUV/ MPV/ Small Van' },
+    { name: 'Large Van', logo: 'Large Van' },
+    { name: 'Big Vans', logo: 'Big Vans' },
+    { name: 'Taxi (Saloon)/ Motorcycle', logo: 'Taxi (Saloon)/ Motorcycle' }
   ];
 
   const [selectedCarType, setSelectedCarType] = React.useState(sessionStorage.getItem('carType'));

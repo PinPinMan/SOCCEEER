@@ -33,7 +33,6 @@ export const ProgressB = () => {
   const step1Content = <div class='vh-65'><CancelButton/><CarTypes /></div>;
   const step2Content = <div class='vh-65'><CancelButton/><CarInfo/></div>;
   const step3Content = <div class='vh-65'><CancelButton/><Payment/></div>; 
-  const step4Content = <div class='vh-65'><CancelButton/></div>;
   function step1Validator() {
     if (sessionStorage.getItem('carType') == null) {
         return false;
@@ -81,11 +80,6 @@ export const ProgressB = () => {
           label: "Payment",
           name: "step 3",
           content: step3Content,
-        },
-        {
-          label: "Success",
-          name: "Step 4",
-          content: step4Content,
         }
       ]}
     />
