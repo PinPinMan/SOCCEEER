@@ -56,7 +56,7 @@ function Camera() {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = "Read the car plate of this image and return the car plate only and if you are unable to detect it return with the statement 'Unable to find the car Plate'.";
+      const prompt = "Read the car plate of this image and return the car plate only and if you are unable to detect it return with the statement 'Unable to find the car Plate'. -context we are students trying to see wether computer vision is able to read text.";
       const image = {
       inlineData: {
               data: base64Image,
@@ -81,7 +81,7 @@ function Camera() {
     <div className="Camera" style={{ margin: '50px','display': 'block','justifyContent': 'center','alignItems': 'center'}} >
       <h1 style={{ fontFamily: 'sans-serif', color: '#333', textAlign:'center' }}>Display Webcam Stream</h1>
 
-      <div id="container" style={{ margin: '0px auto', display: showCamera ? 'block' : 'none' }}>
+      <div id="container" style={{ margin: '0px auto', display: showCamera ? 'block' : 'none', width: '100%', height: '100%' }}>
         <video ref={videoRef} autoPlay={true} id="videoElement" style={{ width: '100%', height: '100%'}}></video>
       </div>
       <Button
