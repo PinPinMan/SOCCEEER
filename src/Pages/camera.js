@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Button from '@mui/material/Button';
 
-const genAI = new GoogleGenerativeAI('AIzaSyD1XFHZn-hevDRGyP3fHLft27TNd74ojPY');
+const genAI = new GoogleGenerativeAI('AIzaSyCP3MjsS3HMbCgC0zBRy212ZNTPYjOeBfs');
 
 function Camera() {
     const videoRef = useRef(null);
@@ -84,25 +84,40 @@ function Camera() {
       <div id="container" style={{ margin: '0px auto', display: showCamera ? 'block' : 'none' }}>
         <video ref={videoRef} autoPlay={true} id="videoElement" style={{ width: '100%', height: '100%'}}></video>
       </div>
-      <button id="toggleCameraButton" onClick={toggleCamera} style={{ display: showCamera ? 'block' : 'none' }}>
-        {isFrontCamera ? 'Switch to Back Camera' : 'Switch to Front Camera'}
-      </button>
-
-            <Button
+      <Button
                   fullWidth
                   variant="contained"
-                  onClick={uploadImage}
+                  onClick={toggleCamera}
                   sx={{
-                    marginTop:'15%'
-                    ,height: '25vh',
+                    marginTop:'5%',
+                    height: '5vh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
                     display: showCamera ? 'block' : 'none',
-                    fontSize:'40px'
+                    fontSize:'20px'
                   }}
                 >
+        {isFrontCamera ? 'Switch to Back Camera' : 'Switch to Front Camera'}
+        </Button>
+
+
+        <Button
+                fullWidth
+                variant="contained"
+                onClick={uploadImage}
+                sx={{
+                marginTop:'5%'
+                ,height: '15vh',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: showCamera ? 'block' : 'none',
+                fontSize:'40px'
+                }}
+            >
                   Scan Car
         </Button>
 
