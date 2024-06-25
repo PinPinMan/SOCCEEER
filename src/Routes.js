@@ -8,7 +8,7 @@ import Landing from './Pages/LandingPage';
 import CarTypes from './Pages/CarType';
 import { ProgressB } from './progressB';
 import Success from './Pages/success';
-
+import Camera from './Pages/camera'
 const AppRoutes = () => (
   <Router>
     <Routes>
@@ -20,6 +20,7 @@ const AppRoutes = () => (
     <Route path="/History" element={<History />} />
     <Route path="/CarTypes" element={<CarTypes />} />
     <Route path="/Success" element={<Success />} />
+    <Route path="/Camera" element={<Camera />} />
     </Routes>
   </Router>
 );

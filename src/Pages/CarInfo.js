@@ -11,7 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 const defaultTheme = createTheme();
 
 const CarInfo = () => {
-    const [carplate, setCarplate] = React.useState(sessionStorage.getItem('carplate'));
+    const [carplate, setCarplate] = React.useState(sessionStorage.getItem('carplate_AI'));
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -40,7 +40,7 @@ const CarInfo = () => {
                             name="carplate"
                             autoComplete="carplate"
                             value={carplate}
-                            onChange={(e) => sessionStorage.setItem('carplate', e.target.value)}
+                            onChange={(e) => sessionStorage.setItem('carplate_AI', e.target.value)}
                         />
                     </Box>
                 </Box>

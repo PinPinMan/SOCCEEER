@@ -4,35 +4,18 @@ import "react-step-progress/dist/index.css";
 import './progressB.css' // Import the custom CSS
 
 
-// import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Payment from './Pages/Payment';
-// import Login from './Pages/LoginPage';
-// import MainMenu from './Pages/MainMenu'
-// import History from './Pages/History';
-// import Landing from './Pages/LandingPage';
 import CarTypes from './Pages/CarType';
 import CarInfo from './Pages/CarInfo';
 import Payment from "./Pages/Payment";
 import CancelButton from "./cancelButton";
-// const AppRoutes = () => (
-//   <Router>
-//     <Routes>
-//     <Route path="/" element={<Landing />} />
-//     <Route path="/login" element={<Login />} />
-//     <Route path="/payment/:c" element={<Payment />} />
-//     <Route path="/main" element={<MainMenu />} />
-//     <Route path="/History" element={<History />} />
-//     <Route path="/CarTypes" element={<CarTypes />} />
-//     </Routes>
-//   </Router>
-// );
-
+import Camera from "./Pages/camera";
 
 export const ProgressB = () => {
   const step1Content = <div class='vh-65'><CancelButton/><CarTypes /></div>;
   const step2Content = <div class='vh-65'><CancelButton/><CarInfo/></div>;
-  const step3Content = <div class='vh-65'><CancelButton/><Payment/></div>; 
+  const step3Content = <div class='vh-65'><CancelButton/><Payment/></div>;
+  const stepCamera = <div class='vh-65'><CancelButton/><Camera/></div>;
+
   function step1Validator() {
     if (sessionStorage.getItem('carType') == null) {
         return false;
@@ -42,7 +25,16 @@ export const ProgressB = () => {
   }
 
   function step2Validator() {
-    if (sessionStorage.getItem('carplate') == null) {
+    if (sessionStorage.getItem('carplate_AI') == null) {
+        return false;
+    } else {
+        return true;
+    }
+  }
+  
+
+  function stepCameraValidator() {
+    if (sessionStorage.getItem('carplate_AI') == null) {
         return false;
     } else {
         return true;
@@ -71,10 +63,15 @@ export const ProgressB = () => {
           validator: step1Validator
         },
         {
-          label: "Car Plate",
+          label: "Camera",
           name: "step 2",
+          content: stepCamera,
+          validator: stepCameraValidator
+        },
+        {
+          label: "Car Plate",
+          name: "step 3",
           content: step2Content,
-          validator: step2Validator
         },
         {
           label: "Payment",
