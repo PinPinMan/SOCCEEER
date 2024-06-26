@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Button from '@mui/material/Button';
 
-const genAI = new GoogleGenerativeAI('AIzaSyCP3MjsS3HMbCgC0zBRy212ZNTPYjOeBfs');
+const genAI = new GoogleGenerativeAI('AIzaSyD1XFHZn-hevDRGyP3fHLft27TNd74ojPY');
 
 function Camera() {
     const videoRef = useRef(null);
@@ -66,7 +66,7 @@ function Camera() {
 
       const result = await model.generateContent([prompt, image]);
       console.log(result.response.text());
-      sessionStorage.setItem('carplate_AI',result.response.text())
+      localStorage.setItem('carplate_AI',result.response.text())
 
     //   if (result.response.text().length > 10){
     //     window.location.reload();

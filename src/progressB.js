@@ -17,7 +17,7 @@ export const ProgressB = () => {
   const stepCamera = <div class='vh-65'><CancelButton/><Camera/></div>;
 
   function step1Validator() {
-    if (sessionStorage.getItem('carType') == null) {
+    if (localStorage.getItem('carType') == null) {
         return false;
     } else {
         return true;
@@ -25,7 +25,7 @@ export const ProgressB = () => {
   }
 
   function step2Validator() {
-    if (sessionStorage.getItem('carplate_AI') == null) {
+    if (localStorage.getItem('carplate_AI') == null) {
         return false;
     } else {
         return true;
@@ -34,7 +34,7 @@ export const ProgressB = () => {
   
 
   function stepCameraValidator() {
-    if (sessionStorage.getItem('carplate_AI') == null) {
+    if (localStorage.getItem('carplate_AI') == null) {
         return false;
     } else {
         return true;

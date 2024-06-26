@@ -6,8 +6,8 @@ const DataFetcher = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  var carplate = sessionStorage.getItem("carplate");
-  var carType = sessionStorage.getItem("carType");
+  var carplate = localStorage.getItem("carplate_AI");
+  var carType = localStorage.getItem("carType");
   var price = 0.00
   if (carType == 'Saloon Car'){
       price = 12;

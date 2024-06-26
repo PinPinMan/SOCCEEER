@@ -18,11 +18,11 @@ export default function CarTypes() {
     { name: 'Taxi (Saloon)/ Motorcycle', logo: 'Taxi (Saloon)/ Motorcycle' }
   ];
 
-  const [selectedCarType, setSelectedCarType] = React.useState(sessionStorage.getItem('carType'));
+  const [selectedCarType, setSelectedCarType] = React.useState(localStorage.getItem('carType'));
   
 
   const handleButtonClick = (carType) => {
-    sessionStorage.setItem('carType', carType);
+    localStorage.setItem('carType', carType);
     setSelectedCarType(carType);
   };
 
