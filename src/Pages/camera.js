@@ -68,9 +68,6 @@ function Camera() {
       console.log(result.response.text());
       localStorage.setItem('carplate_AI',result.response.text().replace(' ',''))
 
-    //   if (result.response.text().length > 10){
-    //     window.location.reload();
-    //   }
     } catch (error) {
       console.error("Error sending image to Gemini API:", error);
     //   window.location.reload();
