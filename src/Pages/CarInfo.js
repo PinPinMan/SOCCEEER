@@ -33,7 +33,7 @@ const CarInfo = () => {
                     <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                         <img src="https://www.minds.org.sg/wp-content/uploads/2020/04/logo-minds@2x.png" alt="MINDS Logo" style={{ width: '200px', height: 'auto' }} />
                     </Box>
-                    <Typography component="h1" variant="h5" align="center">
+                    <Typography component="h1" variant="h4" align="center">
                         Enter Carplate Number
                     </Typography>
                     <Box component="form" noValidate sx={{ mt: 1 }}>
@@ -45,6 +45,8 @@ const CarInfo = () => {
                             name="carplate"
                             autoComplete="carplate"
                             value={carplate}
+                            // Increase the size of the textfield
+                            sx={{ '& input': { fontSize: '1.5rem' } }}
                             onChange={handleCarplateChange}
                         />
                     </Box>
