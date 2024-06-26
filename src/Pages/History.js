@@ -27,14 +27,16 @@ const StudentTable = ({ date }) => {
     <table style={{ width: '97%', borderCollapse: 'collapse', margin: '10px auto', justifyContent: 'center' }}>
       <thead>
         <tr style={{ backgroundColor: '#f2f2f2' }}>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Type</th>
           <th style={{ border: '1px solid #ddd', padding: '8px' }}>Car Plate</th>
-          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date & Time</th>
+          <th style={{ border: '1px solid #ddd', padding: '8px' }}>Time</th>
           <th style={{ border: '1px solid #ddd', padding: '8px' }}>Price</th>
         </tr>
       </thead>
       <tbody>
         {cars.map((car) => (
           <tr key={car.car_wash_id}>
+            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_type}</td>
             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.car_plate}</td>
             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.date_time}</td>
             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{car.price}</td>
@@ -53,6 +55,45 @@ const ScrollableTableContainer = ({ date }) => {
     </div>
   );
 };
+
+const CarTypesSummary = ({ date }) => {
+  const [summary, setSummary] = useState({});
+  
+  useEffect(() => {
+    fetch(`https://mysql-back-3-socceeer.apps.hackathon.cnasg.dellcsc.com/summary/${date ? `${date}` : ''}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSummary(data);
+      });
+  }, [date]);
+
+  return (
+    <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; text-align: center; margin: 10px auto;">
+    <div style="flex: 1; margin: 5px;">
+        <h2>Summary</h2>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total price: {summary.total}</p>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total for Saloon Car: {summary.saloon}</p>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total for SUV/ MPV/ Small Van: {summary.suv}</p>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total for Large Van: {summary.large}</p>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total for Big Vans: {summary.big}</p>
+    </div>
+    <div style="flex: 1; margin: 5px;">
+        <p>Total for Taxi (Saloon)/ Motorcycle: {summary.taxi}</p>
+    </div>
+</div>
+  );
+};
+
 
 const StudentTableResponsive = ({ date }) => {
   const [cars, setCars] = useState([]);
@@ -116,8 +157,10 @@ export default function App() {
         style={{ margin: '10px auto', display: 'block' }}
       />
       {isMobileView ? <StudentTableResponsive date={selectedDate} /> : <ScrollableTableContainer date={selectedDate} />}
+      <CarTypesSummary date={selectedDate} />
       <Button onClick={handleReturn} style={{ position:'absolute', bottom: '10px', left: '10px', backgroundColor: '#007bff', color: 'white', fontWeight: 'bold' }}>Return</Button>
     </div>
+
   );
 }
 const styles = `
