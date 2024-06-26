@@ -56,8 +56,10 @@ export default function CarTypes() {
                   variant="contained"
                   onClick={() => handleButtonClick(car.logo)}
                   sx={{
-                    height: '25vh',
+                    height: '15vh',
                     display: 'flex',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',

@@ -18,6 +18,15 @@ const SuccessMessage = () => {
 
       if (response.ok) {
         console.log('Transaction successful');
+        Object.keys(localStorage).forEach((key) => {
+          if (key !== 'isLoggedIn') {
+              localStorage.removeItem(key);
+          }}); 
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+          window.location.href = '/main';
+      } else {
+          window.location.href = '/';
+      }
       } else {
         console.error('Transaction failed');
       }
