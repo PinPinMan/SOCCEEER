@@ -66,7 +66,7 @@ function Camera() {
 
       const result = await model.generateContent([prompt, image]);
       console.log(result.response.text());
-      localStorage.setItem('carplate_AI',result.response.text())
+      localStorage.setItem('carplate_AI',result.response.text().replace(' ',''))
 
     //   if (result.response.text().length > 10){
     //     window.location.reload();
