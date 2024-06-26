@@ -17,11 +17,11 @@ const CancelButton = () => {
     const handleCancelTransaction = () => {
         handleCloseModal(); // Close modal after confirming cancellation
         // Clear session storage except admin
-        Object.keys(sessionStorage).forEach((key) => {
+        Object.keys(localStorage).forEach((key) => {
             if (key !== 'isLoggedIn') {
-                sessionStorage.removeItem(key);
+                localStorage.removeItem(key);
             }}); 
-        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
             window.location.href = '/main';
         } else {
             window.location.href = '/';
@@ -44,7 +44,7 @@ const CancelButton = () => {
                 onClose={handleCloseModal}
                 aria-labelledby="cancel-transaction-modal-title"
                 aria-describedby="cancel-transaction-modal-description"
-            >
+            > 
                 <Box
                     sx={{
                         position: 'absolute',
@@ -59,7 +59,7 @@ const CancelButton = () => {
                         borderRadius: '5px',
                         textAlign: 'center',
                     }}
-                >
+                >   
                     <h2 id="cancel-transaction-modal-title">Cancel Transaction</h2>
                     <p id="cancel-transaction-modal-description">Are you sure you want to cancel the transaction?</p>
                     <Button variant="contained" onClick={handleCancelTransaction} sx={{ mr: 2 }}>Yes</Button>

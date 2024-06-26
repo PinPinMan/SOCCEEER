@@ -7,11 +7,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 
-
 const defaultTheme = createTheme();
 
 const CarInfo = () => {
-    const [carplate, setCarplate] = React.useState(localStorage.getItem('carplate_AI'));
+    const [carplate, setCarplate] = React.useState(localStorage.getItem('carplate_AI') || '');
+
+    const handleCarplateChange = (e) => {
+        const value = e.target.value;
+        setCarplate(value);
+        localStorage.setItem('carplate_AI', value);
+    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -40,7 +45,7 @@ const CarInfo = () => {
                             name="carplate"
                             autoComplete="carplate"
                             value={carplate}
-                            onChange={(e) => localStorage.setItem('carplate_AI', e.target.value)}
+                            onChange={handleCarplateChange}
                         />
                     </Box>
                 </Box>

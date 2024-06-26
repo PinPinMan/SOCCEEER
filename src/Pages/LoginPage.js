@@ -51,9 +51,16 @@ export default function SignIn() {
     }
   };
 
+  const returnHome = () => {
+    window.location.href = '/';
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+
+      <Button onClick={returnHome} style={{ position:'absolute', bottom: '10px', left: '10px', backgroundColor: '#007bff', color: 'white', fontWeight: 'bold' }}>Return</Button>
+
         <CssBaseline />
         <Box
           sx={{
